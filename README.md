@@ -6,10 +6,10 @@ The gulp plugin `gulp-order` allows you to reorder a stream of files using the s
 
 Assume you want to concatenate the following files in the given order (with `gulp-concat`):
 
-- vendor/js1.js
-- vendor/**/*.{coffee,js}
-- app/coffee1.coffee
-- app/**/*.{coffee,js}
+- `vendor/js1.js`
+- `vendor/**/*.{coffee,js}`
+- `app/coffee1.coffee`
+- `app/**/*.{coffee,js}`
 
 You'll need two streams:
 
