@@ -16,7 +16,7 @@ You'll need two streams:
 - A stream that emits the JavaScript files, and
 - a stream that emits the compiled CoffeeScript files.
  
-To combine the streams you can use `es.merge` (from `event-stream`) but you'll notice that `es.merge` just emits the files in the same order as they come in. This can be quite random. With `gulp-order` you can reorder the files.
+To combine the streams you can pipe into another `gulp.src` or use `es.merge` (from `event-stream`). But you'll notice that in both cases the files are emitted in the same order as they come in - and this can seem very random. With `gulp-order` you can reorder the files.
 
 ## Usage
 
@@ -24,14 +24,13 @@ To combine the streams you can use `es.merge` (from `event-stream`) but you'll n
 
 ```javascript
 var order = require("gulp-order");
-var es = require("event-stream");
+var coffee = require("gulp-coffee");
 var concat = require("gulp-concat");
 
-var coffeeFiles = gulp.src("**/*.coffee");
-var jsFiles = gulp.src("**/*.js");
-
-es
-  .merge(coffeeFiles, jsFiles)
+gulp
+  .src("**/*.coffee")
+  .pipe(coffee())
+  .pipe(gulp.src("**/*.js")) // gulp.src passes through input
   .pipe(order([
     "vendor/js1.js",
     "vendor/**/*.js",
@@ -49,6 +48,10 @@ Uses [`minimatch`](https://github.com/isaacs/minimatch) for matching.
 ## Tips
 
 - Try to move your ordering out of your `gulp.src(...)` calls into `order(...)` instead.
+
+## Alternative Approaches
+
+- [`gulp-if`](https://github.com/robrich/gulp-if)
 
 ## Contributors
 
