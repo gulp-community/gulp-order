@@ -30,5 +30,13 @@
   "dependencies": {
     "through": "~2.3.4",
     "minimatch": "~0.2.14"
-  }
+  },
+  "keywords": [
+    "gulp",
+    "gulpplugin",
+    "minimatch",
+    "concat",
+    "order",
+    "pipe"
+  ]
 }
