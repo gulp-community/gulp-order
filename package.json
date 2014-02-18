@@ -1,8 +1,9 @@
 {
   "name": "gulp-order",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The gulp plugin `gulp-order` allows you to reorder a stream of files using the same syntax as of `gulp.src`.",
   "main": "lib/index.js",
+  "files": "lib",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublish": "node_modules/.bin/coffee -o lib -c src/*.coffee"
