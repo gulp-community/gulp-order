@@ -10,7 +10,7 @@ module.exports = (patterns = []) ->
     for pattern, index in patterns
       return index if minimatch s, pattern
 
-    return globs.length
+    return patterns.length
 
   onEnd = ->
     files.sort (a, b) ->
