@@ -1,15 +1,29 @@
 {
   "name": "gulp-order",
-  "version": "1.0.2",
   "description": "The gulp plugin `gulp-order` allows you to reorder a stream of files using the same syntax as of `gulp.src`.",
+  "version": "1.0.2",
+  "author": {
+    "name": "Marcel Jackwerth",
+    "email": "marceljackwerth@gmail.com",
+    "url": "http://twitter.com/sirlantis"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sirlantis/gulp-order.git"
+  },
   "main": "lib/index.js",
   "files": "lib",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublish": "node_modules/.bin/coffee -o lib -c src/*.coffee"
   },
-  "author": "Marcel Jackwerth",
-  "license": "MIT",
+  "engines": {
+    "node": "*"
+  },
+  "license": {
+    "type": "MIT",
+    "url": "http://github.com/sirlantis/gulp-order/raw/master/LICENSE"
+  },
   "devDependencies": {
     "coffee-script": "~1.7.1"
   },
