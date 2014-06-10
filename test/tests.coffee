@@ -17,7 +17,7 @@ newFile = (filepath, base) ->
 
 describe "gulp-order", ->
   describe "order()", ->
-    it "should order files", (done) ->
+    it "orders files", (done) ->
       stream = order(["foo.js", "bar.js"])
       
       files = []
@@ -36,7 +36,7 @@ describe "gulp-order", ->
       stream.write newFile("foo.js")
       stream.end()
     
-    it "should support globs", (done) ->
+    it "supports globs", (done) ->
       stream = order(["vendor/**/*", "app/**/*"])
       
       files = []
@@ -57,7 +57,7 @@ describe "gulp-order", ->
       stream.write newFile("other/b/a.js")
       stream.end()
     
-    it "should support a custom base", (done) ->
+    it "supports a custom base", (done) ->
       stream = order(['scripts/b.css'], base: cwd)
 
       files = []
