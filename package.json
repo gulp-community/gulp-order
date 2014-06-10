@@ -1,7 +1,7 @@
 {
   "name": "gulp-order",
   "description": "The gulp plugin `gulp-order` allows you to reorder a stream of files using the same syntax as of `gulp.src`.",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "author": {
     "name": "Marcel Jackwerth",
     "email": "marceljackwerth@gmail.com",
