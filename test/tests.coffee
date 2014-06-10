@@ -71,3 +71,8 @@ describe "gulp-order", ->
       stream.write newFile("a.css", path.join(cwd, "scripts/"))
       stream.write newFile("b.css", path.join(cwd, "scripts/"))
       stream.end()
+      
+    it "warns on relative paths in order list", ->
+      expect ->
+        order(['./user.js'])
+      .to.throw "Don't start patterns with `./` - they will never match. Just leave out `./`"

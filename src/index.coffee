@@ -1,9 +1,15 @@
 through = require "through"
-minimatch = require "minimatch"
+{ Minimatch } = require "minimatch"
 path = require "path"
 
 module.exports = (patterns = [], options = {}) ->
   files = []
+  
+  matchers = patterns.map (pattern) ->
+    if pattern.indexOf("./") is 0
+      throw new Error "Don't start patterns with `./` - they will never match. Just leave out `./`"
+      
+    Minimatch pattern
   
   onFile = (file) -> files.push file
   
@@ -14,10 +20,10 @@ module.exports = (patterns = [], options = {}) ->
       file.relative
 
   rank = (s) ->
-    for pattern, index in patterns
-      return index if minimatch s, pattern
+    for matcher, index in matchers
+      return index if matcher.match s
 
-    return patterns.length
+    return matchers.length
 
   onEnd = ->
     files.sort (a, b) ->
