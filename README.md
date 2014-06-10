@@ -41,6 +41,19 @@ gulp
   .pipe(gulp.dest("dist"));
 ```
 
+## Options
+
+```javascript
+gulp
+  .src("**/*.coffee")
+  // ...
+  .pipe(order([...], options))
+```
+
+#### `base`
+
+Some plugins might provide a wrong `base` on the Vinyl file objects. `base` allows you to set a base directory (for example: your application root directory) for all files.
+
 ## Features
 
 Uses [`minimatch`](https://github.com/isaacs/minimatch) for matching.

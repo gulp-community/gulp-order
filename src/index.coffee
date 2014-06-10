@@ -1,10 +1,17 @@
 through = require "through"
 minimatch = require "minimatch"
+path = require "path"
 
-module.exports = (patterns = []) ->
+module.exports = (patterns = [], options = {}) ->
   files = []
   
   onFile = (file) -> files.push file
+  
+  relative = (file) ->
+    if options.base?
+      path.relative options.base, file.path
+    else
+      file.relative
 
   rank = (s) ->
     for pattern, index in patterns
@@ -14,11 +21,11 @@ module.exports = (patterns = []) ->
 
   onEnd = ->
     files.sort (a, b) ->
-      aIndex = rank a.relative
-      bIndex = rank b.relative
+      aIndex = rank relative a
+      bIndex = rank relative b
 
       if aIndex is bIndex
-        String(a.relative).localeCompare b.relative
+        String(relative a).localeCompare relative b
       else
         aIndex - bIndex
 

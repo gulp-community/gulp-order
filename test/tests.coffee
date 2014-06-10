@@ -4,13 +4,15 @@ path = require "path"
 { expect } = require "chai"
 require "mocha"
 
-newFile = (filepath) ->
-  base = "/home/johndoe/"
+cwd = "/home/johndoe/"
+
+newFile = (filepath, base) ->
+  base ?= cwd
   
   new File
     path: path.join(base, filepath)
     base: base
-    cwd: base
+    cwd: cwd
     contents: new Buffer("")
 
 describe "gulp-order", ->
@@ -53,4 +55,19 @@ describe "gulp-order", ->
       stream.write newFile("vendor/z/a.js")
       stream.write newFile("other/a.js")
       stream.write newFile("other/b/a.js")
+      stream.end()
+    
+    it "should support a custom base", (done) ->
+      stream = order(['scripts/b.css'], base: cwd)
+
+      files = []
+      stream.on "data", files.push.bind(files)
+      stream.on "end", ->
+        expect(files.length).to.equal 2
+        expect(files[0].relative).to.equal "b.css"
+        expect(files[1].relative).to.equal "a.css"
+        done()
+
+      stream.write newFile("a.css", path.join(cwd, "scripts/"))
+      stream.write newFile("b.css", path.join(cwd, "scripts/"))
       stream.end()
