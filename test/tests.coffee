@@ -8,7 +8,7 @@ cwd = "/home/johndoe/"
 
 newFile = (filepath, base) ->
   base ?= cwd
-  
+
   new File
     path: path.join(base, filepath)
     base: base
@@ -19,7 +19,7 @@ describe "gulp-order", ->
   describe "order()", ->
     it "orders files", (done) ->
       stream = order(["foo.js", "bar.js"])
-      
+
       files = []
       stream.on "data", files.push.bind(files)
       stream.on "end", ->
@@ -30,15 +30,15 @@ describe "gulp-order", ->
         expect(files[3].relative).to.equal "baz-b.js"
         done()
 
-      stream.write newFile("baz-b.js")      
-      stream.write newFile("bar.js")  
+      stream.write newFile("baz-b.js")
+      stream.write newFile("bar.js")
       stream.write newFile("baz-a.js")
       stream.write newFile("foo.js")
       stream.end()
-    
+
     it "supports globs", (done) ->
       stream = order(["vendor/**/*", "app/**/*"])
-      
+
       files = []
       stream.on "data", files.push.bind(files)
       stream.on "end", ->
@@ -49,14 +49,14 @@ describe "gulp-order", ->
         expect(files[3].relative).to.equal "other/a.js"
         expect(files[4].relative).to.equal "other/b/a.js"
         done()
-        
+
       stream.write newFile("vendor/f/b.js")
       stream.write newFile("app/a.js")
       stream.write newFile("vendor/z/a.js")
       stream.write newFile("other/a.js")
       stream.write newFile("other/b/a.js")
       stream.end()
-    
+
     it "supports a custom base", (done) ->
       stream = order(['scripts/b.css'], base: cwd)
 
@@ -71,7 +71,7 @@ describe "gulp-order", ->
       stream.write newFile("a.css", path.join(cwd, "scripts/"))
       stream.write newFile("b.css", path.join(cwd, "scripts/"))
       stream.end()
-      
+
     it "warns on relative paths in order list", ->
       expect ->
         order(['./user.js'])

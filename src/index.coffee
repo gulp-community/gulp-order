@@ -4,15 +4,15 @@ path = require "path"
 
 module.exports = (patterns = [], options = {}) ->
   files = []
-  
+
   matchers = patterns.map (pattern) ->
     if pattern.indexOf("./") is 0
       throw new Error "Don't start patterns with `./` - they will never match. Just leave out `./`"
-      
+
     Minimatch pattern
-  
+
   onFile = (file) -> files.push file
-  
+
   relative = (file) ->
     if options.base?
       path.relative options.base, file.path
