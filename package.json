@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "through": "~2.3.4",
-    "minimatch": "~0.2.14",
+    "minimatch": "0.2.14",
     "stable": "0.1.5"
   },
   "keywords": [
