@@ -1,6 +1,7 @@
 through = require "through"
 { Minimatch } = require "minimatch"
 path = require "path"
+sort = require "stable"
 
 module.exports = (patterns = [], options = {}) ->
   files = []
@@ -26,7 +27,7 @@ module.exports = (patterns = [], options = {}) ->
     return matchers.length
 
   onEnd = ->
-    files.sort (a, b) ->
+    sort.inplace files, (a, b) ->
       aIndex = rank relative a
       bIndex = rank relative b
 
