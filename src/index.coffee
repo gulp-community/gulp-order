@@ -21,10 +21,15 @@ module.exports = (patterns = [], options = {}) ->
       file.relative
 
   rank = (s) ->
-    for matcher, index in matchers
-      return index if matcher.match s
+    indexes = matchers.map (matcher, index) ->
+      if matcher.match s then index else undefined
+    .filter (index) ->
+      index?
 
-    return matchers.length
+    if indexes.length
+      indexes[indexes.length - 1]
+    else
+      matchers.length
 
   onEnd = ->
     sort.inplace files, (a, b) ->
