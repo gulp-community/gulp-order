@@ -61,6 +61,11 @@ Uses [`minimatch`](https://github.com/isaacs/minimatch) for matching.
 ## Tips
 
 - Try to move your ordering out of your `gulp.src(...)` calls into `order(...)` instead.
+- You can see the order of the outputted files with [`gulp-print`](https://github.com/alexgorbatchev/gulp-print)
+ 
+## Troubleshooting
+
+If your files aren't being ordered in the manner that you expect, try adding the [`base`](#base) option.
 
 ## Alternative Approaches
 
