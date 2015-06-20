@@ -8,7 +8,7 @@ module.exports = (patterns = [], options = {}) ->
 
   matchers = patterns.map (pattern) ->
     if pattern.indexOf("./") is 0
-      throw new Error "Don't start patterns with `./` - they will never match. Just leave out `./`"
+      throw new Error "Don't start patterns with `./` - they will never match. Use `base` option instead."
 
     Minimatch pattern
 
