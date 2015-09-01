@@ -16,9 +16,9 @@ module.exports = (patterns = [], options = {}) ->
 
   relative = (file) ->
     if options.base?
-      path.relative options.base, file.path
+      path.relative options.base, process.cwd(), file.path
     else
-      file.relative
+      path.relative process.cwd(), file.path
 
   rank = (s) ->
     for matcher, index in matchers
@@ -28,8 +28,8 @@ module.exports = (patterns = [], options = {}) ->
 
   onEnd = ->
     sort.inplace files, (a, b) ->
-      aIndex = rank path.relative( process.cwd(), a.path)
-      bIndex = rank path.relative( process.cwd(), b.path)
+      aIndex = rank relative a
+      bIndex = rank relative b
 
       if aIndex is bIndex
         String(relative a).localeCompare relative b
