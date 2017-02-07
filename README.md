@@ -39,6 +39,19 @@ gulp
   ]))
   .pipe(concat("all.js"))
   .pipe(gulp.dest("dist"));
+
+  // When passing gulp.src stream directly to order, don't include path source/scripts in the order paths.
+  // They should be relative to the /**/*.js.
+  gulp
+  .src("source/scripts/**/*.js")
+  .pipe(order([
+    "vendor/js1.js",
+    "vendor/**/*.js",
+    "app/coffee1.js",
+    "app/**/*.js"
+  ]))
+  .pipe(concat("all.js"))
+  .pipe(gulp.dest("dist"));
 ```
 
 ## Options
