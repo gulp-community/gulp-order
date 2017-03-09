@@ -16,9 +16,9 @@ module.exports = (patterns = [], options = {}) ->
 
   relative = (file) ->
     if options.base?
-      path.relative options.base, file.path
+      path.relative options.base, process.cwd(), file.path
     else
-      file.relative
+      path.relative process.cwd(), file.path
 
   rank = (s) ->
     for matcher, index in matchers
