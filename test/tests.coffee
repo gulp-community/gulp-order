@@ -43,11 +43,11 @@ describe "gulp-order", ->
       stream.on "data", files.push.bind(files)
       stream.on "end", ->
         expect(files.length).to.equal 5
-        expect(files[0].relative).to.equal "vendor/f/b.js"
-        expect(files[1].relative).to.equal "vendor/z/a.js"
-        expect(files[2].relative).to.equal "app/a.js"
-        expect(files[3].relative).to.equal "other/a.js"
-        expect(files[4].relative).to.equal "other/b/a.js"
+        expect(files[0].relative).to.equal path.normalize "vendor/f/b.js"
+        expect(files[1].relative).to.equal path.normalize "vendor/z/a.js"
+        expect(files[3].relative).to.equal path.normalize "other/a.js"
+        expect(files[2].relative).to.equal path.normalize "app/a.js"
+        expect(files[4].relative).to.equal path.normalize "other/b/a.js"
         done()
 
       stream.write newFile("vendor/f/b.js")
