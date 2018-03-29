@@ -14,8 +14,8 @@
   "main": "lib/index.js",
   "files": "lib",
   "scripts": {
-    "test": "node_modules/.bin/mocha",
-    "prepublish": "node_modules/.bin/coffee -o lib -c src/*.coffee"
+    "test": "mocha",
+    "prepare": "coffee -o lib -c ./src/*.coffee"
   },
   "engines": {
     "node": "*"
@@ -25,7 +25,7 @@
     "url": "http://github.com/sirlantis/gulp-order/raw/master/LICENSE"
   },
   "devDependencies": {
-    "coffee-script": "~1.7.1",
+    "coffeescript": "^2.2.3",
     "mocha": "~1.17.1",
     "chai": "~1.9.0",
     "gulp-util": "~2.2.14"
