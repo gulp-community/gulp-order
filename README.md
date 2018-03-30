@@ -91,21 +91,17 @@ function customRank(matcher, file){
 }
 
 const files = [
-  "C:/files/script.js"
-  "C:/files/test.config.js",
-  "C:/files/test.run.js"
-  "C:/files/test.module.js",
+  "C:/files/script.js",
+  "C:/files/*.config.js",
+  "C:/files/*.run.js"
+  "C:/files/*.module.js",
+  "C:/files/**/*.controller.js",
 ];
 
 gulp
   .src(files)
   // ...
-  .pipe(order([
-    'C:/files/*.module.js'
-    'C:/files/*.config.js'
-    'C:/files/*.run.js'
-    'C:/files/*.js'
-  ], {rank: customRank}))
+  .pipe(order(files, {rank: customRank}))  // this should keep the same order of the files array
 ```
 
 ## Features
