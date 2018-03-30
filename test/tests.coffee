@@ -9,11 +9,12 @@ cwd = "/home/johndoe/"
 newFile = (filepath, base) ->
   base ?= cwd
 
-  new File
-    path: path.join(base, filepath)
-    base: base
-    cwd: cwd
-    contents: new Buffer("")
+  new File {
+      path: path.join(base, filepath)
+      base: base
+      cwd: cwd
+      contents: new Buffer("")
+    }
 
 describe "gulp-order", ->
   describe "order()", ->
@@ -58,7 +59,7 @@ describe "gulp-order", ->
       stream.end()
 
     it "supports a custom base", (done) ->
-      stream = order(['scripts/b.css'], base: cwd)
+      stream = order(['scripts/b.css'], { base: cwd })
 
       files = []
       stream.on "data", files.push.bind(files)
@@ -71,6 +72,37 @@ describe "gulp-order", ->
       stream.write newFile("a.css", path.join(cwd, "scripts/"))
       stream.write newFile("b.css", path.join(cwd, "scripts/"))
       stream.end()
+
+    it "supports a custom custom rank function", (done) ->
+      byPath = (matchers, file) ->
+        for matcher, index in matchers
+          return index if matcher.match file.path
+
+        return matchers.length
+
+      toAbsolutePath = (p) -> path.resolve(__dirname, p)
+
+      files = ["**/*.module.js", "**/*.config.js", "**/*.run.js"].map toAbsolutePath
+      console.log files
+      stream = order(files, { rank: byPath })
+
+      files = []
+      stream.on "data", files.push.bind(files)
+      stream.on "end", ->
+        expect(files.length).to.equal 4
+        expect(files[0].relative).to.equal "test.module.js"
+        expect(files[1].relative).to.equal "test.config.js"
+        expect(files[2].relative).to.equal "test.run.js"
+        expect(files[3].relative).to.equal "test.js"
+        done()
+
+      absoluteBase = path.resolve(__dirname, "scripts/")
+      stream.write newFile("test.run.js",    absoluteBase)
+      stream.write newFile("test.js",        absoluteBase)
+      stream.write newFile("test.module.js", absoluteBase)
+      stream.write newFile("test.config.js", absoluteBase)
+      stream.end()
+
 
     it "warns on relative paths in order list", ->
       expect ->
