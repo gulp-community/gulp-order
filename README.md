@@ -67,6 +67,47 @@ gulp
 
 Some plugins might provide a wrong `base` on the Vinyl file objects. `base` allows you to set a base directory (for example: your application root directory) for all files.
 
+#### `rank`
+
+Although this plugin solves most of the order problems with minimatch, sometimes you migth need to use a custom ranking function.
+The params received by the rank function are:
+
+- `matchers` The order param mapped as minimatch matchers
+- `files` vinyl pipeline files
+
+This function **must** return a rank number for the given file.
+
+A usage example would be:
+
+```javascript
+
+function customRank(matcher, file){
+  for(const i in matchers){
+    if(matchers[i].match(file.path)){
+      return i;
+    }
+  }
+  return matchers.length;
+}
+
+const files = [
+  "C:/files/script.js"
+  "C:/files/test.config.js",
+  "C:/files/test.run.js"
+  "C:/files/test.module.js",
+];
+
+gulp
+  .src(files)
+  // ...
+  .pipe(order([
+    'C:/files/*.module.js'
+    'C:/files/*.config.js'
+    'C:/files/*.run.js'
+    'C:/files/*.js'
+  ], {rank: customRank}))
+```
+
 ## Features
 
 Uses [`minimatch`](https://github.com/isaacs/minimatch) for matching.
