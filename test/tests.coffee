@@ -6,6 +6,14 @@ require "mocha"
 
 cwd = "/home/johndoe/"
 
+toAbsolutePath = (p) -> path.resolve(__dirname, p)
+
+byPath = (matchers, file) ->
+  for matcher, index in matchers
+    return index if matcher.match file.path
+  
+  return matchers.length
+
 newFile = (filepath, base) ->
   base ?= cwd
 
@@ -14,7 +22,7 @@ newFile = (filepath, base) ->
       base: base
       cwd: cwd
       contents: new Buffer("")
-    }
+  }
 
 describe "gulp-order", ->
   describe "order()", ->
@@ -74,16 +82,7 @@ describe "gulp-order", ->
       stream.end()
 
     it "supports a custom custom rank function", (done) ->
-      byPath = (matchers, file) ->
-        for matcher, index in matchers
-          return index if matcher.match file.path
-
-        return matchers.length
-
-      toAbsolutePath = (p) -> path.resolve(__dirname, p)
-
       files = ["**/*.module.js", "**/*.config.js", "**/*.run.js"].map toAbsolutePath
-      console.log files
       stream = order(files, { rank: byPath })
 
       files = []
