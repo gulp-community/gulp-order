@@ -15,7 +15,7 @@ You'll need two streams:
 
 - A stream that emits the JavaScript files, and
 - a stream that emits the compiled CoffeeScript files.
- 
+
 To combine the streams you can pipe into another `gulp.src` or use `es.merge` (from `event-stream`). But you'll notice that in both cases the files are emitted in the same order as they come in - and this can seem very random. With `gulp-order` you can reorder the files.
 
 ## Usage
@@ -63,13 +63,13 @@ gulp
   .pipe(order([...], options))
 ```
 
-#### `base`
+### `base`
 
 Some plugins might provide a wrong `base` on the Vinyl file objects. `base` allows you to set a base directory (for example: your application root directory) for all files.
 
-#### `rank`
+### `rank`
 
-Although this plugin solves most of the order problems with minimatch, sometimes you migth need to use a custom ranking function.
+Although this plugin solves most of the order problems with minimatch, sometimes you might need to use a custom ranking function.
 The params received by the rank function are:
 
 - `matchers` The order param mapped as minimatch matchers
@@ -112,7 +112,7 @@ Uses [`minimatch`](https://github.com/isaacs/minimatch) for matching.
 
 - Try to move your ordering out of your `gulp.src(...)` calls into `order(...)` instead.
 - You can see the order of the outputted files with [`gulp-print`](https://github.com/alexgorbatchev/gulp-print)
- 
+
 ## Troubleshooting
 
 If your files aren't being ordered in the manner that you expect, try adding the [`base`](#base) option.

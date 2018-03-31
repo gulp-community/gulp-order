@@ -81,7 +81,7 @@ describe "gulp-order", ->
       stream.write newFile("b.css", path.join(cwd, "scripts/"))
       stream.end()
 
-    it "supports a custom custom rank function", (done) ->
+    it "supports a custom rank function", (done) ->
       files = ["**/*.module.js", "**/*.config.js", "**/*.run.js"].map toAbsolutePath
       stream = order(files, { rank: byPath })
 
