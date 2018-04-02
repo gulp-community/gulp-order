@@ -20,16 +20,18 @@ module.exports = (patterns = [], options = {}) ->
     else
       file.relative
 
-  rank = (s) ->
+  rank = (matchers, file) ->
+    relativePath = relative file
     for matcher, index in matchers
-      return index if matcher.match s
+      return index if matcher.match relativePath
 
     return matchers.length
 
   onEnd = ->
     sort.inplace files, (a, b) ->
-      aIndex = rank relative a
-      bIndex = rank relative b
+      ranker = options.rank || rank
+      aIndex = ranker(matchers, a)
+      bIndex = ranker(matchers, b)
 
       if aIndex is bIndex
         String(relative a).localeCompare relative b
