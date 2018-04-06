@@ -27,9 +27,9 @@
     "vinyl": "~2.1.0"
   },
   "dependencies": {
-    "through": "~2.3.4",
-    "minimatch": "0.2.14",
-    "stable": "0.1.5"
+    "through": "2.3.8",
+    "minimatch": "3.0.4",
+    "stable": "0.1.6"
   },
   "keywords": [
     "gulp",
