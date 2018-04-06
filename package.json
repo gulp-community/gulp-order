@@ -21,9 +21,9 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "coffee-script": "~1.7.1",
-    "mocha": "~1.17.1",
-    "chai": "~1.9.0",
+    "chai": "~4.1.2",
+    "coffeescript": "~2.2.4",
+    "mocha": "~5.0.5",
     "vinyl": "~2.1.0"
   },
   "dependencies": {
