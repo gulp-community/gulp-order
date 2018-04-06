@@ -12,18 +12,14 @@
     "url": "git://github.com/sirlantis/gulp-order.git"
   },
   "main": "lib/index.js",
-  "files": "lib",
   "scripts": {
-    "test": "node_modules/.bin/mocha",
-    "prepublish": "node_modules/.bin/coffee -o lib -c src/*.coffee"
+    "test": "mocha",
+    "prepublish": "coffee -o lib -c src/index.coffee"
   },
   "engines": {
     "node": "*"
   },
-  "license": {
-    "type": "MIT",
-    "url": "http://github.com/sirlantis/gulp-order/raw/master/LICENSE"
-  },
+  "license": "MIT",
   "devDependencies": {
     "coffee-script": "~1.7.1",
     "mocha": "~1.17.1",
