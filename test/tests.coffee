@@ -1,6 +1,6 @@
 order = require "../src"
 path = require "path"
-{ File } = require "gulp-util"
+Vinyl = require "vinyl"
 { expect } = require "chai"
 require "mocha"
 
@@ -9,7 +9,7 @@ cwd = "/home/johndoe/"
 newFile = (filepath, base) ->
   base ?= cwd
 
-  new File
+  new Vinyl
     path: path.join(base, filepath)
     base: base
     cwd: cwd
