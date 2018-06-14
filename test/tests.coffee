@@ -13,7 +13,7 @@ newFile = (filepath, base) ->
     path: path.join(base, filepath)
     base: base
     cwd: cwd
-    contents: new Buffer("")
+    contents: Buffer.from("")
 
 describe "gulp-order", ->
   describe "order()", ->
