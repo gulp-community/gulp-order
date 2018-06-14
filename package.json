@@ -2,24 +2,16 @@
   "name": "gulp-order",
   "description": "The gulp plugin `gulp-order` allows you to reorder a stream of files using the same syntax as of `gulp.src`.",
   "version": "1.1.1",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "homepage": "https://github.com/sirlantis/gulp-order#readme",
+  "bugs": "https://github.com/sirlantis/gulp-order/issues",
+  "repository": "https://github.com/sirlantis/gulp-order.git",
   "author": {
     "name": "Marcel Jackwerth",
     "email": "marceljackwerth@gmail.com",
     "url": "http://twitter.com/sirlantis"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/sirlantis/gulp-order.git"
-  },
-  "main": "lib/index.js",
-  "scripts": {
-    "test": "mocha",
-    "prepublish": "coffee -o lib -c src/index.coffee"
-  },
-  "engines": {
-    "node": "*"
-  },
-  "license": "MIT",
   "devDependencies": {
     "chai": "~4.1.2",
     "coffeescript": "~2.3.1",
@@ -31,6 +23,9 @@
     "minimatch": "~3.0.4",
     "stable": "~0.1.8"
   },
+  "engines": {
+    "node": ">=6.0.0"
+  },
   "keywords": [
     "gulp",
     "gulpplugin",
@@ -38,5 +33,9 @@
     "concat",
     "order",
     "pipe"
-  ]
+  ],
+  "scripts": {
+    "test": "mocha",
+    "prepublish": "coffee -o lib -c src/index.coffee"
+  }
 }
