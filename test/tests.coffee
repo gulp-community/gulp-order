@@ -72,6 +72,36 @@ describe "gulp-order", ->
       stream.write newFile("b.css", path.join(cwd, "scripts/"))
       stream.end()
 
+    it "order file by last matched index", (done) ->
+      stream = order(["vendor/**/*", "vendor/**/foo/**/*"])
+
+      files = []
+      stream.on "data", files.push.bind(files)
+      stream.on "end", ->
+        expect(files.length).to.equal 8
+        relatives = files.map (file) -> file.relative
+        expect(relatives).to.equal [
+          "vendor/a.js"
+          "vendor/b.js"
+          "vendor/bar/a.js"
+          "vendor/bar/b.js"
+          "vendor/bar/foo/a.js"
+          "vendor/bar/foo/b.js"
+          "vendor/foo/a.js"
+          "vendor/foo/b.js"
+        ]
+        done()
+
+      stream.write newFile("vendor/bar/a.js")
+      stream.write newFile("vendor/bar/b.js")
+      stream.write newFile("vendor/bar/foo/a.js")
+      stream.write newFile("vendor/bar/foo/b.js")
+      stream.write newFile("vendor/foo/a.js")
+      stream.write newFile("vendor/foo/b.js")
+      stream.write newFile("vendor/a.js")
+      stream.write newFile("vendor/b.js")
+      stream.end()
+
     it "warns on relative paths in order list", ->
       expect ->
         order(['./user.js'])
